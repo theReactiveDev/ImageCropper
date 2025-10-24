@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import ReactCrop, { type Crop, type PixelCrop } from 'react-image-crop';
 
 import { Button } from '@components/Button';
+import { Loader } from '@components/Loader';
 import { getCroppedImage, drawMaskedImage } from './helpers';
 import style from './imageCropper.module.css';
 import 'react-image-crop/dist/ReactCrop.css';
@@ -11,6 +12,7 @@ export const ImageCropper = () => {
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
   const [imageIsReady, setImageIsReady] = useState(false);
   const [cropIsActive, setCropIsActive] = useState(false);
+  const [canvasIsLoading, setCanvasIsLoading] = useState(false);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -30,14 +32,18 @@ export const ImageCropper = () => {
 
   useEffect(() => {
     if (canvasRef.current) {
+      setCanvasIsLoading(true);
       drawMaskedImage(canvasRef.current)
         .then(() => setImageIsReady(true))
-        .catch(alert);
+        .catch(alert)
+        .finally(() => setCanvasIsLoading(false));
     }
   }, []);
 
   return (
     <div className={style.container}>
+      {canvasIsLoading && <Loader className={style.canvasLoader} />}
+
       <div className={style.cropContainer}>
         <div className={style.scrollWrapper}>
           <ReactCrop
