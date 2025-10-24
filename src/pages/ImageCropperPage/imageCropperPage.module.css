@@ -1,0 +1,41 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  max-height: 100dvh;
+  max-width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  padding: 20px;
+  font-size: 26px;
+  line-height: 29px;
+  font-weight: 700;
+  color: #4d6bfe;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  overflow: hidden;
+  min-width: 820px;
+}
+
+.leftSection {
+  width: 300px;
+}
+
+.rightSection {
+  width: 200px;
+}
+
+.imageSection {
+  width: calc(100% - 500px);
+  padding: 20px 0;
+}
