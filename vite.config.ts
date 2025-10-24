@@ -7,4 +7,5 @@ import { pathResolve } from './path.config';
 export default defineConfig({
   resolve: pathResolve,
   plugins: [react()],
+  base: 'ImageCropper',
 });
